@@ -29,11 +29,11 @@
 # #
 # # # Asking for input
 # #
-# # name = input("What is your name? ")  # In python 3, it is just called input()
-# # print("Hello %s." % name)
-# #
-# # age = input("How old are you? ")
-# # print("%s?! DAYUM you old." % age)
+name = input("What is your name? ")  # In python 3, it is just called input()
+print("Hello %s." % name)
+
+age = input("How old are you? ")
+print("%s?! DAYUM you old." % age)
 # #
 #
 # # Functions
@@ -122,3 +122,16 @@
 #  # This should be on line 1
 # print(random.randint(0,100))
 
+# Comparisons
+print(1 == 1) # Is 1 equal to 1?
+print(1 != 2) # Is 2 not equal to 2?
+print(10 <= 15)
+print(not False)
+
+# Recasting
+c = '1'
+print(c == 1)
+print(int(c) == 1)
+print(c == str(1))
+
+# The input command ALWAYS gives a string
