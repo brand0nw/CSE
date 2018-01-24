@@ -14,7 +14,7 @@
       <file leaf-file-name="Brandon Widjaja - Lucky 7's.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Brandon Widjaja - Lucky 7's.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="478">
+            <state relative-caret-position="697">
               <caret line="41" column="0" lean-forward="false" selection-start-line="41" selection-start-column="0" selection-end-line="41" selection-end-column="0" />
               <folding />
             </state>
@@ -44,7 +44,7 @@
       <file leaf-file-name="Notes.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Notes.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="274">
+            <state relative-caret-position="3366">
               <caret line="198" column="0" lean-forward="false" selection-start-line="198" selection-start-column="0" selection-end-line="198" selection-end-column="0" />
               <folding />
             </state>
@@ -54,8 +54,8 @@
       <file leaf-file-name="Brandon Widjaja - Hang Man.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Brandon Widjaja - Hang Man.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="223">
-              <caret line="32" column="0" lean-forward="true" selection-start-line="32" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
+            <state relative-caret-position="206">
+              <caret line="54" column="17" lean-forward="false" selection-start-line="54" selection-start-column="17" selection-end-line="54" selection-end-column="17" />
               <folding>
                 <element signature="e#0#13#0" expanded="true" />
               </folding>
@@ -88,7 +88,7 @@
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="18" />
+    <option name="x" value="-8" />
     <option name="width" value="1347" />
     <option name="height" value="735" />
   </component>
@@ -108,7 +108,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -120,6 +119,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scratches" />
       <pane id="Scope" />
     </panes>
   </component>
@@ -144,7 +144,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.Notes">
+  <component name="RunManager" selected="Python.Brandon Widjaja - Hang Man">
     <configuration name="Brandon Widjaja - BlackJack" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -239,8 +239,8 @@
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Python.Notes" />
-        <item index="1" class="java.lang.String" itemvalue="Python.Brandon Widjaja - Hang Man" />
+        <item index="0" class="java.lang.String" itemvalue="Python.Brandon Widjaja - Hang Man" />
+        <item index="1" class="java.lang.String" itemvalue="Python.Notes" />
         <item index="2" class="java.lang.String" itemvalue="Python.Brandon Widjaja - BlackJack" />
         <item index="3" class="java.lang.String" itemvalue="Python.Brandon Widjaja - Lucky 7's" />
         <item index="4" class="java.lang.String" itemvalue="Python.Brandon Widjaja - Guessgame" />
@@ -649,7 +649,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Brandon Widjaja - Lucky 7's.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="478">
+        <state relative-caret-position="697">
           <caret line="41" column="0" lean-forward="false" selection-start-line="41" selection-start-column="0" selection-end-line="41" selection-end-column="0" />
           <folding />
         </state>
@@ -665,7 +665,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Notes.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="274">
+        <state relative-caret-position="3366">
           <caret line="198" column="0" lean-forward="false" selection-start-line="198" selection-start-column="0" selection-end-line="198" selection-end-column="0" />
           <folding />
         </state>
@@ -673,8 +673,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Brandon Widjaja - Hang Man.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="223">
-          <caret line="32" column="0" lean-forward="true" selection-start-line="32" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
+        <state relative-caret-position="206">
+          <caret line="54" column="17" lean-forward="false" selection-start-line="54" selection-start-column="17" selection-end-line="54" selection-end-column="17" />
           <folding>
             <element signature="e#0#13#0" expanded="true" />
           </folding>
