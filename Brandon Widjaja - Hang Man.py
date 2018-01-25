@@ -3,16 +3,15 @@ import string
 
 """
 A general guide for Hangman
-1. Make a word bank - 10 items
-2. Pick a random item from the list
-3. Add a guess to the list of letters guessed
-4. Reveal letters already guessed
-5. Create the win condition
+1. Make a word bank - 10 items - good
+2. Pick a random item from the list - done
+3. Add a guess to the list of letters guessed - done
+4. Reveal letters already guessed - done
+5. Create the win condition - working
 """
 
 print("Welcome to Hangman.")
-the_count = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-word_bank = ["hot", "cheese", "charlie", "daniels", "kenshiro", "edison", "georgia", "liberty", "trombone", "computer"]
+word_bank = ["hot", "cheese", "Charlie", "Daniels", "Kenshiro", "Edison", "Georgia", "liberty", "trombone", "computer"]
 guesses_left = 10
 
 word = random.choice(word_bank)
@@ -23,9 +22,8 @@ player_guess = "True"
 print("You have 10 guesses.")
 
 while word != player_guess:
-
+    # Build output
     output = []
-
     for letter in word:
         if letter in letters_guessed:
             output.append(letter)
@@ -34,6 +32,13 @@ while word != player_guess:
             output.append("*")
     print(output)
 
+    if output == list(word):
+        print("".join(list(word)))
+        print("You Win!")
+        print("Game Over")
+        exit(0)
+
+    # Ask for input
     current_guess = input()
 
     if current_guess == 'quit':
@@ -52,7 +57,4 @@ while word != player_guess:
 
     print(letters_guessed)
 
-    if output == :
-        print("You Win!")
-        print("Game Over")
-        exit(0)
+
