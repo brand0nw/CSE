@@ -1,5 +1,4 @@
 import random
-import string
 
 """
 A general guide for Hangman
@@ -7,17 +6,19 @@ A general guide for Hangman
 2. Pick a random item from the list - done
 3. Add a guess to the list of letters guessed - done
 4. Reveal letters already guessed - done
-5. Create the win condition - working
+5. Create the win condition - done i think?
 """
 
 print("Welcome to Hangman.")
-word_bank = ["hot", "cheese", "Charlie", "Daniels", "Kenshiro", "Edison", "Georgia", "liberty", "trombone", "computer"]
+word_bank = ["hot", "cheese", "Charlie", "Daniels", "Kenshiro", "Edison", "Georgia", "liberty", "nani", "computer"]
 guesses_left = 10
 
 word = random.choice(word_bank)
 
 letters_guessed = []
 player_guess = "True"
+
+listTwo = list(letters_guessed)
 
 print("You have 10 guesses.")
 
@@ -30,7 +31,7 @@ while word != player_guess:
 
         else:
             output.append("*")
-    print(output)
+    print("".join(list(output)))
 
     if output == list(word):
         print("".join(list(word)))
@@ -55,6 +56,4 @@ while word != player_guess:
 
     letters_guessed.append(current_guess)
 
-    print(letters_guessed)
-
-
+    print("You've guessed %s." % ", ".join(list(letters_guessed)))
