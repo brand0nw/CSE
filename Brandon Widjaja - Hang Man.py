@@ -1,5 +1,5 @@
 import random
-
+import string
 """
 A general guide for Hangman
 1. Make a word bank - 10 items - good
@@ -10,27 +10,30 @@ A general guide for Hangman
 """
 
 print("Welcome to Hangman.")
-word_bank = ["hot", "cheese", "Charlie", "Daniels", "Kenshiro", "Edison", "Georgia", "liberty", "nani", "computer"]
+word_bank = ["Hot!", "Cheese.", "Charlie?", "Daniels?", "Kenshiro?", "Edison!", "Georgia.",
+             "liberty!", "Nani.", "Computer?"]
 guesses_left = 10
 
 word = random.choice(word_bank)
 
-letters_guessed = []
+letters_guessed = list(string.punctuation + " ")
 player_guess = "True"
 
 listTwo = list(letters_guessed)
 
+punctuation = string.punctuation
 print("You have 10 guesses.")
 
 while word != player_guess:
     # Build output
     output = []
     for letter in word:
-        if letter in letters_guessed:
+        if letter.lower() in letters_guessed:
             output.append(letter)
 
         else:
             output.append("*")
+
     print("".join(list(output)))
 
     if output == list(word):
@@ -40,7 +43,7 @@ while word != player_guess:
         exit(0)
 
     # Ask for input
-    current_guess = input()
+    current_guess = input().lower()
 
     if current_guess == 'quit':
         print("Game Over")
@@ -55,5 +58,4 @@ while word != player_guess:
         exit(0)
 
     letters_guessed.append(current_guess)
-
     print("You've guessed %s." % ", ".join(list(letters_guessed)))
