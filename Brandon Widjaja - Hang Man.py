@@ -17,6 +17,7 @@ guesses_left = 10
 word = random.choice(word_bank)
 
 letters_guessed = list(string.punctuation + " ")
+only_letters = []
 player_guess = "True"
 
 listTwo = list(letters_guessed)
@@ -58,4 +59,5 @@ while word != player_guess:
         exit(0)
 
     letters_guessed.append(current_guess)
-    print("You've guessed %s." % ", ".join(list(letters_guessed)))
+    only_letters.append(current_guess)
+    print("You've guessed %s." % ", ".join(list(only_letters)))
