@@ -47,12 +47,78 @@ world_map = {
                        "In the center of the room there is a pedestal.\n"
                        "In the pedestal there is a weapon",
         'PATHS': {
-            ''
+            'SOUTH': 'SEWERMAINTENANCE',
+        }
+    },
+    'SEWERMAINTENENCE': {
+        'NAME': "Sewer Maintenance",
+        'DESCRIPTION': "You fall down a hole and break your legs there is no way out.\n"
+                       "The room is dark, you feel a hostile presence.",
+        'PATHS': {
+            'EAST': 'LAIR'
+        }
+    },
+    'LAIR': {
+        'NAME': "Lair",
+        'DESCRIPTION': "The room is dark and there are four shadowy figures who begin to approach you.",
+        'PATHS': {
+            'NORTHEAST': 'SANCTUARY',
+        }
+    },
+    'SANCTUARY': {
+            'NAME': "Sanctuary for People",
+            'DESCRIPTION': "You leave the dark room to find yourself in a well lit tavern.\n"
+                           "There are people present who seem to be non-hostile.\n"
+                           "They call the tavern Sanctuary.",
+            'PATHS': {
+                'SOUTHEAST': 'LEGOROOM'
+            }
+    },
+    'LEGOROOM': {
+            'NAME': "Child's Room",
+            'DESCRIPTION': "You enter a room that resembles one that would belong to a child.\n"
+                           "There are toys everywhere, especially the painful lego.",
+            'PATHS': {
+                'WEST': 'ROOM',
+                'NORTH': 'FINALBOSSROOM'
+            }
+    },
+    'FINALBOSSROOM': {
+                'NAME': "Final Boss Room",
+                'DESCRIPTION': "You enter a room that the final boss resides in front of you, Captain Poof Wonder...\n"
+                               "But he seems different.\n"
+                               "He screams 'You were expecting a final boss, but it was I Dio.'",
+                'PATHS': {
+                    'NORTHEAST': 'HALLWAY',
+                    'NORTH': 'PORTALROOM'
+                }
+    },
+    'PORTALROOM': {
+        'NAME': "Portal Entrance",
+        'DESCRIPTION': "You walk into a room with a glowing red portal.",
+        'PATHS': {
+            'NORTH': 'LAVAROOM'
+        }
+    },
+    'LAVAROOM': {
+        'NAME': "hOt RoOm",
+        'DESCRIPTION': "YoU entEr a roOm whEre iT Is sO hot thAt th3 c0nsoLe is LAGG1Ng.\n"
+                       "There is A man Wear!ng a W!nt3r c0at say1ng 'Man's not hot'",
+        'PATHS': {
+        }
+    },
+    'HALLWAY': {
+        'NAME': "Dark Hallway",
+        'DESCRIPTION': "You enter a dark hallway.\n"
+                       "Suddenly you here a man charging at you screaming 'I'm Useful!'",
+        'PATHS': {
+            'SOUTHEAST':
         }
     },
 }
 current_node = world_map['ROOM']
 directions = ['NORTH', 'SOUTH', 'EAST', 'WEST', 'NORTHWEST', 'NORTHEAST', 'SOUTHWEST', 'SOUTHEAST']
+leg_status = 'walk'
 
 while True:
 
@@ -65,7 +131,13 @@ while True:
     if command in directions:
         try:
             name_of_node = current_node['PATHS'][command]
+            if current_node == 'VAULT' and name_of_node == 'MANHOLE':
+                print("You fall down the manhole and break your legs.")
+                print("You can no longer walk.")
+                leg_status = 'crawl'
+                print("You %s into the room" % leg_status)
             current_node = world_map[name_of_node]
+
         except KeyError:
             print("You cannot go that way.")
     else:
