@@ -1,3 +1,5 @@
+# import winsound
+
 world_map = {
     'ROOM': {
         'NAME': "Room",
@@ -112,13 +114,42 @@ world_map = {
         'DESCRIPTION': "You enter a dark hallway.\n"
                        "Suddenly you here a man charging at you screaming 'I'm Useful!'",
         'PATHS': {
-            'SOUTHEAST':
+            'SOUTHEAST': 'SHRINE',
+            'SOUTHWEST': 'FINALBOSSROOM'
+        }
+    },
+    'SHRINE': {
+        'NAME': "Shrine",
+        'DESCRIPTION': "You enter the room with an eerie presence.\n"
+                       "The presence seems to come from the shrine in front of you.\n"
+                       "There is a picture of Dio.",
+        'PATHS': {
+            'SOUTH': 'DARKCORRIDOR',
+            'NORTHWEST': 'HALLWAY'
+        }
+    },
+    'DARKCORRIDOR': {
+        'NAME': "Dark Corridor",
+        'DESCRIPTION': "You walk into a dark room with a man slowly moon walking towards you.\n"
+                       "He gradually comes closer with each 'Hee Hee' becoming louder.",
+        'PATHS': {
+            'SOUTHWEST': 'DARKROOM'
+        }
+    },
+    'DARKROOM': {
+        'NAME': "Dark Room",
+        'DESCRIPTION': "You enter a dark room with only one entrance.\n"
+                       "Suddenly a Dwarf hops out of the darkness and steals an item.",
+        'PATHS': {
         }
     },
 }
 current_node = world_map['ROOM']
 directions = ['NORTH', 'SOUTH', 'EAST', 'WEST', 'NORTHWEST', 'NORTHEAST', 'SOUTHWEST', 'SOUTHEAST']
 leg_status = 'walk'
+OP_weapon = 'Melon Bratch'
+
+# winsound.PlaySound('hehe.mp3', winsound.SND_FILENAME)
 
 while True:
 
