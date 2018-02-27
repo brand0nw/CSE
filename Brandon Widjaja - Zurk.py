@@ -133,7 +133,8 @@ world_map = {
         'DESCRIPTION': "You walk into a dark room with a man slowly moon walking towards you.\n"
                        "He gradually comes closer with each 'Hee Hee' becoming louder.",
         'PATHS': {
-            'SOUTHWEST': 'DARKROOM'
+            'SOUTHWEST': 'DARKROOM',
+            'NORTH': 'SHRINE'
         }
     },
     'DARKROOM': {
@@ -141,6 +142,7 @@ world_map = {
         'DESCRIPTION': "You enter a dark room with only one entrance.\n"
                        "Suddenly a Dwarf hops out of the darkness and steals an item.",
         'PATHS': {
+            'NORTHEAST': 'DARKCORRIDOR'
         }
     },
 }
