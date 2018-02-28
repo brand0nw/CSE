@@ -1,8 +1,8 @@
 class Room(object):
-    def __init__(self, name, room, description, north, south, east, west, north_west, north_east, south_east,
+    def __init__(self, name, location, description, north, south, east, west, north_west, north_east, south_east,
                  south_west):
         self.name = name
-        self.room = room
+        self.location = location
         self.description = description
         self.north = north
         self.south = south
@@ -36,7 +36,7 @@ well_lit_room = Room("Well Lit Room", 'well_lit_room', "You enter a well lit roo
 vault = Room("Vault of Undeniably Valuable Really Long Name Loot", 'vault',
              "You enter a room filled with gold."
              "In the center of the room there is a pedestal."
-             "In the pedestal there is a weapon.", None, 'sewer_maintenance', None, None, None, None, None,
+             "In the pedestal there is a weapon.", None, 'sewer_maintenance', 'well_lit_room', None, None, None, None,
              None)
 sewer_maintenance = Room("Sewer Maintenance", 'sewer_maintenance',
                          "You fall down a hole and break your legs there is no way out."
@@ -75,24 +75,24 @@ dark_corridor = Room("Dark Corridor", 'dark_corridor',
 dark_room = Room("Dark Room", 'dark_room', "You enter a dark room with only one entrance."
                                            "Suddenly a Dwarf hops out of the darkness and steals an item.",
                  None, None, None, None, None, 'dark_corridor', None, None)
+current_node = room
+
 while True:
 
-    print(current_node)
-    print(current_node)
+    print(current_node.name)
+    print(current_node.description)
 
     command = input('>_')
     if command == 'quit':
         quit(0)
     if command in directions:
         try:
-            name_of_node = current_node['PATHS'][command]
-            if current_node == 'VAULT' and name_of_node == 'MANHOLE':
+            current_node.move(command)
+            if current_node == sewer_maintenance:
                 print("You fall down the manhole and break your legs.")
                 print("You can no longer walk.")
                 leg_status = 'crawl'
                 print("You %s into the room" % leg_status)
-            current_node =
-
         except KeyError:
             print("You cannot go that way.")
     else:
