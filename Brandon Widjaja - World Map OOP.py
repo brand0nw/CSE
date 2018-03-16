@@ -43,7 +43,7 @@ class Character(object):
 
 
 main_chracter = Character("Dave", 'nugu', 'radish_farmer', 'you', 'alive', 'something')
-bar_tender = Character("Matilda", 'human', 'bar_tender', 'friendly', 'alive', None, money=200)
+bar_tender = Character("Matilda", 'human', 'bar_tender', 'friendly', 'alive', None, money=9999999)
 bar_patron = Character("Craig", 'elf', 'bum', 'friendly', 'alive', None)
 boss1 = Character("Ukifak Lasgoni", 'orc', 'war_lord', 'hostile', 'alive', 'swing', 200000)
 boss2 = Character("JoJo", 'human', '?', 'hostile', 'alive', 'punch', 1000000)
@@ -54,7 +54,7 @@ donetella = Character("Donatella", 'tortoise', 'ninja', 'neutral', 'alive', 'swi
 michaelangela = Character("Michaelangela", 'tortoise', 'ninja', 'neutral', 'alive', 'swing')
 rophel = Character("Rophel", 'tortoise', 'ninja', 'neutral', 'alive', 'stab')
 splintar = Character("Splintar", 'rat', 'unknown', 'friendly', 'alive', None)
-hot_mans = Character("Big Shaq", 'human', 'rapper', 'neutral', 'alive', 'shoot', 2)
+hot_mans = Character("Lil' RiceGrain", 'human', 'rapper', 'neutral', 'alive', 'shoot', 2)
 dwarf = Character("Harold", 'dwarf', 'theif', 'hostile', 'alive', 'shank')
 worshipper1 = Character("Kristofer", 'human', 'worshipper', 'neutral', 'alive', 'punch', 10)
 worshipper2 = Character("Lonny", 'human', 'worshipper', 'neutral', 'alive', 'punch', 10)
@@ -62,6 +62,10 @@ worshipper3 = Character("Eliseo", 'human', 'worshipper', 'neutral', 'alive', 'pu
 worshipper4 = Character("Ibrahim", 'human', 'worshipper', 'neutral', 'alive', 'punch', 10)
 worshipper5 = Character("Dante", 'human', 'worshipper', 'neutral', 'alive', 'punch', 10)
 osian = Character("Katou", 'orange_beast', 'jerk', 'hostile', 'alive', 'swipe', 999999999999999999999999999999999999999)
+mj = Character("Michael Jackson", 'human', 'singer', 'hostile', 'alive', 'flick', 10000000)
+
+
+
 
 
 class Room(object):
@@ -136,7 +140,7 @@ hall_way = Room("Dark Hallway", 'hallway', "You enter a dark hallway.\n"
 shrine = Room("Shrine", 'shrine', "You enter the room with an eerie presence.\n"
                                   "The presence seems to come from the shrine in front of you.\n"
                                   "There is a picture of Dio.", None, 'dark_corridor', None, None, 'hallway', None,
-              None, None)
+              None, None, [worshipper1, worshipper2, worshipper3, worshipper4, worshipper5])
 dark_corridor = Room("Dark Corridor", 'dark_corridor',
                      "You walk into a dark room with a man slowly moon walking towards you.\n"
                      "He gradually comes closer with each 'Hee Hee' becoming louder.", 'shrine', None, None, None,

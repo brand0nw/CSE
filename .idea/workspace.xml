@@ -14,7 +14,7 @@
       <file leaf-file-name="Class(Python) Notes.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Class(Python) Notes.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
+            <state relative-caret-position="527">
               <caret line="31" column="0" lean-forward="false" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
               <folding />
             </state>
@@ -41,11 +41,35 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Brandon Widjaja - World Map OOP.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Brandon Widjaja - World Map OOP.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Brandon Widjaja - World Map OOP.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-153">
-              <caret line="18" column="0" lean-forward="false" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
+            <state relative-caret-position="-340">
+              <caret line="60" column="48" lean-forward="false" selection-start-line="60" selection-start-column="48" selection-end-line="60" selection-end-column="49" />
+              <folding>
+                <element signature="e#140#357#0" expanded="false" />
+                <element signature="e#740#829#0" expanded="false" />
+                <element signature="e#1135#1258#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Items.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Items.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="549">
+              <caret line="90" column="5" lean-forward="false" selection-start-line="90" selection-start-column="5" selection-end-line="90" selection-end-column="5" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Inheritance Notes.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Inheritance Notes.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="408">
+              <caret line="30" column="50" lean-forward="false" selection-start-line="30" selection-start-column="48" selection-end-line="30" selection-end-column="50" />
               <folding />
             </state>
           </provider>
@@ -90,6 +114,7 @@
         <option value="$PROJECT_DIR$/Inheritance Notes.py" />
         <option value="$PROJECT_DIR$/Programmer Person.py" />
         <option value="$PROJECT_DIR$/Brandon Widjaja - World Map OOP.py" />
+        <option value="$PROJECT_DIR$/Items.py" />
       </list>
     </option>
   </component>
@@ -115,6 +140,7 @@
     </navigator>
     <panes>
       <pane id="Scope" />
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -126,7 +152,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -294,18 +319,11 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="9" />
+      <option name="time" value="16" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/Notes.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2346">
-          <caret line="138" column="90" lean-forward="false" selection-start-line="138" selection-start-column="90" selection-end-line="138" selection-end-column="90" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Brandon Widjaja - Guessgame.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="544">
@@ -625,28 +643,13 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Class(Python) Notes.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
+        <state relative-caret-position="527">
           <caret line="31" column="0" lean-forward="false" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Programmer Person.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="21" column="32" lean-forward="true" selection-start-line="21" selection-start-column="32" selection-end-line="21" selection-end-column="32" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Inheritance Notes.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="175">
-          <caret line="30" column="50" lean-forward="false" selection-start-line="30" selection-start-column="48" selection-end-line="30" selection-end-column="50" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/Programmer Person.py" />
     <entry file="file://$PROJECT_DIR$/Brandon Widjaja - Programmer Person.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -657,8 +660,28 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Brandon Widjaja - World Map OOP.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-153">
-          <caret line="18" column="0" lean-forward="false" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
+        <state relative-caret-position="-340">
+          <caret line="60" column="48" lean-forward="false" selection-start-line="60" selection-start-column="48" selection-end-line="60" selection-end-column="49" />
+          <folding>
+            <element signature="e#140#357#0" expanded="false" />
+            <element signature="e#740#829#0" expanded="false" />
+            <element signature="e#1135#1258#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Inheritance Notes.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="408">
+          <caret line="30" column="50" lean-forward="false" selection-start-line="30" selection-start-column="48" selection-end-line="30" selection-end-column="50" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Items.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="549">
+          <caret line="90" column="5" lean-forward="false" selection-start-line="90" selection-start-column="5" selection-end-line="90" selection-end-column="5" />
           <folding />
         </state>
       </provider>
