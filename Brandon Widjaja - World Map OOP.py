@@ -65,9 +65,6 @@ osian = Character("Katou", 'orange_beast', 'jerk', 'hostile', 'alive', 'swipe', 
 mj = Character("Michael Jackson", 'human', 'singer', 'hostile', 'alive', 'flick', 10000000)
 
 
-
-
-
 class Room(object):
     def __init__(self, name, location, description, north, south, east, west, north_west, north_east, south_east,
                  south_west, characters=None):
