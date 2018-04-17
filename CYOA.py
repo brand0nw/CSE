@@ -423,7 +423,7 @@ mj = Character("Michael Jackson", 'human', 'singer', 'hostile', 'alive', 'flick'
 
 class Room(object):
     def __init__(self, name, location, description, north, south, east, west, north_west, north_east, south_east,
-                 south_west, characters=None, item=None):
+                 south_west, characters=None, item_=None):
         self.name = name
         self.location = location
         self.description = description
@@ -436,7 +436,7 @@ class Room(object):
         self.south_west = south_west
         self.south_east = south_east
         self.characters = characters
-        self.item = item
+        self.item_ = item_
 
     def move(self, direction):
         global current_node
@@ -522,7 +522,7 @@ def combat(target):
                 main_character.attack(target)
             else:
                 print("You hesitate")
-        elif target.health > 0:
+        if target.health > 0:
             target.attack(main_character)
         first_turn = False
 
@@ -569,15 +569,15 @@ while True:
     elif "take" in command:
         item_requested = command[5:]
         print(item_requested)
-        for item in current_node.item:
-            if item.name.lower() == item_requested.lower():
-                main_character.take(item)
+        for item_ in current_node.item_:
+            if item_.name.lower() == item_requested.lower():
+                main_character.take(item_)
 
     elif "drop" in command:
         item_requested = command[5:]
-        for item in inventory:
-            if item.name.lower() == item_requested.lower():
-                main_character.drop(item)
+        for item_ in inventory:
+            if item_.name.lower() == item_requested.lower():
+                main_character.drop(item_)
 
     else:
         print('Command Not Recognized.')
