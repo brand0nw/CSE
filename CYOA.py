@@ -96,25 +96,16 @@ class Steel(Material):
     def __init__(self, name, location, value):
         super(Steel, self).__init__(name, location, value)
 
-    def polish(self):
-        print("It's shiny again")
-
 
 class Wood(Material):
     def __init__(self, name, location, value):
         super(Wood, self).__init__(name, location, value)
-
-    def chip(self):
-        print("Why would you break off a piece of armor")
 
 
 # Weapons
 class LightBlade(Weapon):
     def __init__(self):
         super(LightBlade, self).__init__("Light Blade", "It makes a buzzing sound", 'vault', 50, 20000)
-
-    def ImperialWalk(self):
-        print("Join the dark side.")
 
 
 class Sword(Weapon):
@@ -295,22 +286,26 @@ class Character(object):
         self.occupation = occupation
         self.mode = mode
         self.status = status
-        self.attack = attack
+        self.attack_type = attack
         self.health = health
         self.money = money
         self.inventory = []
 
-    def attack(self, target, take_damage):
+    def attack(self, target, take_damage, dmg):
         self.take_damage = take_damage
         if target.status == 'dead':
             print(target.name + " is already dead")
             return
         if random.randint(1, 6) > 1:
-            target.take_damage(self.attack)
+            target.take_damage(self.attack_type)
             print("%s attacks %s." % (self.name, target.name))
             print("It hits.")
         else:
             print("%s misses." % self.name)
+        self.health -= dmg
+        if self.health <= 0:
+            print(self.name + " has died")
+            self.status = 'dead'
 
     def defend(self, me):
         if self.mode in ['hostile', 'neutral']:
@@ -318,12 +313,6 @@ class Character(object):
             print("You successfully defended yourself.")
         else:
             print("It connects you have been hit")
-
-    def take_damage(self, dmg):
-        self.health -= dmg
-        if self.health <= 0:
-            print(self.name + " has died")
-            self.status = 'dead'
 
     def take(self, item_):
         self.inventory.append(item_)
@@ -398,7 +387,7 @@ sword = Sword()
 
 # Characters
 
-main_character = Character("Dave", 'nugu', 'radish_farmer', 'you', 'alive', 'something')
+main_character = Character("Dave", 'nugu', 'radish_farmer', 'hostile', 'alive', 'bludgeon')
 bar_tender = Character("Matilda", 'human', 'bar_tender', 'friendly', 'alive', None, money=9999999)
 bar_patron = Character("Craig", 'elf', 'bum', 'friendly', 'alive', None)
 boss1 = Character("Ukifak Lasgoni", 'orc', 'war_lord', 'hostile', 'alive', 'swing', 200000)
@@ -519,7 +508,7 @@ def combat(target):
             print("What do you do?")
             combat_command = input(">_").lower()
             if combat_command == 'attack':
-                main_character.attack(target)
+                main_character.attack(target, take_damage=5,dmg=5)
             else:
                 print("You hesitate")
         if target.health > 0:
@@ -530,7 +519,6 @@ def combat(target):
 inventory = []
 
 while True:
-
     # Prints room information
     print(current_node.name)
     print(current_node.description)
