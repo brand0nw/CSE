@@ -1,6 +1,9 @@
 import random
 
 
+print("Welcome to Zurk the dumbest game you'll ever play!\n")
+
+
 class Item(object):
     def __init__(self, name, location, value=0):
         self.name = name
@@ -112,64 +115,40 @@ class Sword(Weapon):
     def __init__(self):
         super(Sword, self).__init__("Sword", "Its broad", 'lair', 35, 250)
 
-    def admire(self):
-        print("%s is really broad")
-
 
 class Club(Weapon):
     def __init__(self):
         super(Club, self).__init__("Club", "Its big and heavy", 'steel_mill', 50, 200)
-
-    def swing(self):
-        print("Its heavy")
 
 
 class Sai(Weapon):
     def __init__(self):
         super(Sai, self).__init__("Sai", "Its pointy", 'lair', 15, 2000)
 
-    def spin(self):
-        print("It spins along your hands")
-
 
 class RustyDagger(Weapon):
     def __init__(self):
         super(RustyDagger, self).__init__("Rusty Dagger", "Make sure to get a tetanus shot.", 'lego_room', 5, 0)
-
-    def throw(self):
-        print("You throw the brown blade")
 
 
 class NunChuck(Weapon):
     def __init__(self):
         super(NunChuck, self).__init__("Nun-chuck", "It spins", 'lair', 10, 25000)
 
-    def flick(self):
-        print("It flicks and is caught in your armpit")
-
 
 class BoStaff(Weapon):
     def __init__(self):
         super(BoStaff, self).__init__("Bo Staff", "Its a long stick", 'lair', 20, 10)
-
-    def twist(self):
-        print("You spin it around your body")
 
 
 class Stick(Weapon):
     def __init__(self):
         super(Stick, self).__init__("Stick", "It's a stick", 'room', 25, 0)
 
-    def twiddle(self):
-        print("You twiddle it between your fingers")
-
 
 class MelonBratch(Weapon):
     def __init__(self):
         super(MelonBratch, self).__init__("Melon Bratch", "It talks", 'empty_room', 9999999999999999, 99999999999999999)
-
-    def turn_on(self):
-        print("It turns on an begins to play 'Smooth Criminal")
 
 
 # Consumables
@@ -216,32 +195,20 @@ class Binky(Cosmetic):
     def __init__(self):
         super(Binky, self).__init__("Binky", 'echoing_room', 100000, "In your mouth")
 
-    def cry(self):
-        print("Aww is the little baby crying")
-
 
 class Bonnet(Cosmetic):
     def __init__(self):
         super(Bonnet, self).__init__("Bonnet", 'lego_room', 100000, "On your head")
-
-    def sit(self):
-        print("You plop yourself down and begin to suck your thumb")
 
 
 class ChickenHat(Cosmetic):
     def __init__(self):
         super(ChickenHat, self).__init__("Chicken Hat", 'final_boss_room', 20, "You look dumb")
 
-    def dance(self):
-        print("Your an even bigger joke now")
-
 
 class TrackSuit(Cosmetic):
     def __init__(self):
         super(TrackSuit, self).__init__("Track Suit", 'room', 20, "You look like a man now.")
-
-    def squat(self):
-        print("You squat")
 
 
 # Armor
@@ -250,33 +217,20 @@ class Boots(Armor):
     def __init__(self, name, location, value, defense, material):
         super(Boots, self).__init__(name, location, value, defense, material)
 
-    def kick(self):
-        print("You kick the air")
-
 
 class Helmet(Armor):
     def __init__(self, name, location, value, defense, material):
         super(Helmet, self).__init__(name, location, value, defense, material)
-
-    def headbutt(self):
-        print("You headbutt the air")
 
 
 class Breastplate(Armor):
     def __init__(self, name, location, value, defense, material):
         super(Breastplate, self).__init__(name, location, value, defense, material)
 
-    def chestbump(self):
-        print("You chestbump the air")
-
 
 class Leggings(Armor):
     def __init__(self, name, location, value, defense, material):
         super(Leggings, self).__init__(name, location, value, defense, material)
-
-    def lunge(self):
-        print("You begin to lunge\n"
-              "Can't forget leg day")
 
 
 class Character(object):
@@ -289,6 +243,7 @@ class Character(object):
         self.attack_type = attack
         self.health = health
         self.money = money
+
         self.inventory = []
 
     def attack(self, target, take_damage, dmg):
@@ -508,7 +463,7 @@ def combat(target):
             print("What do you do?")
             combat_command = input(">_").lower()
             if combat_command == 'attack':
-                main_character.attack(target, take_damage=5,dmg=5)
+                main_character.attack(target, take_damage=5, dmg=0)
             else:
                 print("You hesitate")
         if target.health > 0:
