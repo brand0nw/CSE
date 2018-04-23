@@ -234,7 +234,8 @@ class Leggings(Armor):
 
 
 class Character(object):
-    def __init__(self, name, race, occupation, mode, status, attack, health=100, money=0):
+    def __init__(self, name, race, occupation, mode, status, attack, health=100, money=0, target=None, dmg=0,
+                 take_damage=0):
         self.name = name
         self.race = race
         self.occupation = occupation
@@ -243,16 +244,18 @@ class Character(object):
         self.attack_type = attack
         self.health = health
         self.money = money
+        self.target = target
+        self.dmg = dmg
+        self.take_damage = take_damage
 
         self.inventory = []
 
-    def attack(self, target, take_damage, dmg):
-        self.take_damage = take_damage
+    def attack(self, target, dmg):
         if target.status == 'dead':
             print(target.name + " is already dead")
             return
         if random.randint(1, 6) > 1:
-            target.take_damage(self.attack_type)
+            target.take_damage(dmg)
             print("%s attacks %s." % (self.name, target.name))
             print("It hits.")
         else:
@@ -276,6 +279,10 @@ class Character(object):
     def drop(self, item_):
         self.inventory.remove(item_)
         print("Dropped")
+
+    def take_damage(self):
+        self.health -= self.dmg
+        print("%s takes % damage." % (self.name, self.dmg))
 
 
 # Instantiation of items
@@ -463,7 +470,7 @@ def combat(target):
             print("What do you do?")
             combat_command = input(">_").lower()
             if combat_command == 'attack':
-                main_character.attack(target, take_damage=5, dmg=0)
+                main_character.attack(target, 5)
             else:
                 print("You hesitate")
         if target.health > 0:
