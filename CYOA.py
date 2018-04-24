@@ -23,9 +23,6 @@ class Weapon(Item):
         self.description = description
         self.damage = damage
 
-    def play(self):
-        print("%s is not human" % self.name)
-
 
 class Consumable(Item):
     def __init__(self, name, location, effect, value=0):
@@ -48,9 +45,7 @@ class Armor(Equipable):
     def __init__(self, name, location, value, defense=0, material=None):
         super(Armor, self).__init__(name, location, value)
         self.defense = defense
-
-    def beat(self):
-        print("You slap your chest and your armor makes a hearty pound.")
+        self.material = material
 
 
 class Cosmetic(Equipable):
@@ -66,33 +61,21 @@ class Material(Item):
     def __init__(self, name, location, value):
         super(Material, self).__init__(name, location, value)
 
-    def feel(self):
-        print("Your weird")
-
 
 # Materials
 class Bone(Material):
     def __init__(self, name, location, value):
         super(Bone, self).__init__(name, location, value)
 
-    def look(self):
-        print("It looks decayed")
-
 
 class Blood(Material):
     def __init__(self, name, location, value):
         super(Blood, self).__init__(name, location, value)
 
-    def taste(self):
-        print("It taste irony")
-
 
 class Scales(Material):
     def __init__(self, name, location, value):
         super(Scales, self).__init__(name, location, value)
-
-    def tap(self):
-        print("It gives a nice 'thud'")
 
 
 class Steel(Material):
@@ -234,28 +217,33 @@ class Leggings(Armor):
 
 
 class Character(object):
-    def __init__(self, name, race, occupation, mode, status, attack, health=100, money=0, target=None, dmg=0,
-                 take_damage=0):
+    def __init__(self, name, race, occupation, mode, status, attack_type, health=100, money=0, target=None, dmg=0,
+                 take_damage_=0):
         self.name = name
         self.race = race
         self.occupation = occupation
         self.mode = mode
         self.status = status
-        self.attack_type = attack
+        self.attack_type = attack_type
         self.health = health
         self.money = money
         self.target = target
         self.dmg = dmg
-        self.take_damage = take_damage
+        self.take_damage_ = take_damage_
 
         self.inventory = []
+
+    def take_damage(self):
+        self.health -= self.dmg
+        print("%s takes %s damage." % (self.name, self.dmg))
 
     def attack(self, target, dmg):
         if target.status == 'dead':
             print(target.name + " is already dead")
             return
+
         if random.randint(1, 6) > 1:
-            target.take_damage(dmg)
+            target.take_damage()
             print("%s attacks %s." % (self.name, target.name))
             print("It hits.")
         else:
@@ -280,9 +268,7 @@ class Character(object):
         self.inventory.remove(item_)
         print("Dropped")
 
-    def take_damage(self):
-        self.health -= self.dmg
-        print("%s takes % damage." % (self.name, self.dmg))
+
 
 
 # Instantiation of items
@@ -474,7 +460,7 @@ def combat(target):
             else:
                 print("You hesitate")
         if target.health > 0:
-            target.attack(main_character)
+            target.attack(main_character, 5)
         first_turn = False
 
 
