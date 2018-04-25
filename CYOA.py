@@ -218,7 +218,7 @@ class Leggings(Armor):
 
 class Character(object):
     def __init__(self, name, race, occupation, mode, status, attack_type, health=100, money=0, target=None, dmg=0,
-                 take_damage_=0):
+                 ):
         self.name = name
         self.race = race
         self.occupation = occupation
@@ -229,23 +229,23 @@ class Character(object):
         self.money = money
         self.target = target
         self.dmg = dmg
-        self.take_damage_ = take_damage_
 
         self.inventory = []
 
     def take_damage(self):
         self.health -= self.dmg
-        print("%s takes %s damage." % (self.name, self.dmg))
 
     def attack(self, target, dmg):
         if target.status == 'dead':
             print(target.name + " is already dead")
             return
+        attack_chance = random.randint(1, 6)
 
-        if random.randint(1, 6) > 1:
+        if attack_chance > 1:
             target.take_damage()
             print("%s attacks %s." % (self.name, target.name))
             print("It hits.")
+            print("%s takes %s damage." % (self.name, self.dmg))
         else:
             print("%s misses." % self.name)
         self.health -= dmg
@@ -260,15 +260,13 @@ class Character(object):
         else:
             print("It connects you have been hit")
 
-    def take(self, item_):
-        self.inventory.append(item_)
+    def take(self, item):
+        self.inventory.append(item)
         print("Taken")
 
-    def drop(self, item_):
-        self.inventory.remove(item_)
+    def drop(self, item):
+        self.inventory.remove(item)
         print("Dropped")
-
-
 
 
 # Instantiation of items
@@ -335,11 +333,11 @@ sword = Sword()
 
 # Characters
 
-main_character = Character("Dave", 'nugu', 'radish_farmer', 'hostile', 'alive', 'bludgeon')
+main_character = Character("Dave", 'nugu', 'radish_farmer', 'hostile', 'alive', 'bludgeon', 100, 1000, None, 25)
 bar_tender = Character("Matilda", 'human', 'bar_tender', 'friendly', 'alive', None, money=9999999)
-bar_patron = Character("Craig", 'elf', 'bum', 'friendly', 'alive', None)
-boss1 = Character("Ukifak Lasgoni", 'orc', 'war_lord', 'hostile', 'alive', 'swing', 200000)
-boss2 = Character("JoJo", 'human', '?', 'hostile', 'alive', 'punch', 1000000)
+bar_patron = Character("Craig", 'elf', 'bum', 'friendly', 'alive', None, 100, 5)
+boss1 = Character("Ukifak Lasgoni", 'orc', 'war_lord', 'hostile', 'alive', 'swing', 200000, 0, None, 50)
+boss2 = Character("JoJo", 'human', '?', 'hostile', 'alive', 'punch', 1000000, 0, None, 60)
 final_boss = Character("Captain Poof Wonder", 'human', 'knight_captain', 'hostile', 'deceased', None)
 dio = Character("Dio", 'human', 'annoyance', 'hostile', 'alive', 'swing', 1000)
 leonarda = Character("Leonarda", 'tortoise', 'ninja', 'neutral', 'alive', 'swipe')
@@ -360,7 +358,7 @@ mj = Character("Michael Jackson", 'human', 'singer', 'hostile', 'alive', 'flick'
 
 class Room(object):
     def __init__(self, name, location, description, north, south, east, west, north_west, north_east, south_east,
-                 south_west, characters=None, item_=None):
+                 south_west, characters=None, item=None):
         self.name = name
         self.location = location
         self.description = description
@@ -373,7 +371,7 @@ class Room(object):
         self.south_west = south_west
         self.south_east = south_east
         self.characters = characters
-        self.item_ = item_
+        self.item = item
 
     def move(self, direction):
         global current_node
@@ -505,7 +503,7 @@ while True:
     elif "take" in command:
         item_requested = command[5:]
         print(item_requested)
-        for item_ in current_node.item_:
+        for item_ in current_node.item:
             if item_.name.lower() == item_requested.lower():
                 main_character.take(item_)
 
