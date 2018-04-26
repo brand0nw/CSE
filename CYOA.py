@@ -91,42 +91,42 @@ class Wood(Material):
 # Weapons
 class LightBlade(Weapon):
     def __init__(self):
-        super(LightBlade, self).__init__("Light Blade", "It makes a buzzing sound", 'vault', 50, 20000)
+        super(LightBlade, self).__init__("Light Blade", "It makes a buzzing sound", 'vault', 500, 20000)
 
 
 class Sword(Weapon):
     def __init__(self):
-        super(Sword, self).__init__("Sword", "Its broad", 'lair', 35, 250)
+        super(Sword, self).__init__("Sword", "Its broad", 'lair', 350, 250)
 
 
 class Club(Weapon):
     def __init__(self):
-        super(Club, self).__init__("Club", "Its big and heavy", 'steel_mill', 50, 200)
+        super(Club, self).__init__("Club", "Its big and heavy", 'steel_mill', 500, 200)
 
 
 class Sai(Weapon):
     def __init__(self):
-        super(Sai, self).__init__("Sai", "Its pointy", 'lair', 15, 2000)
+        super(Sai, self).__init__("Sai", "Its pointy", 'lair', 150, 2000)
 
 
 class RustyDagger(Weapon):
     def __init__(self):
-        super(RustyDagger, self).__init__("Rusty Dagger", "Make sure to get a tetanus shot.", 'lego_room', 5, 0)
+        super(RustyDagger, self).__init__("Rusty Dagger", "Make sure to get a tetanus shot.", 'lego_room', 1, 0)
 
 
 class NunChuck(Weapon):
     def __init__(self):
-        super(NunChuck, self).__init__("Nun-chuck", "It spins", 'lair', 10, 25000)
+        super(NunChuck, self).__init__("Nun-chuck", "It spins", 'lair', 100, 25000)
 
 
 class BoStaff(Weapon):
     def __init__(self):
-        super(BoStaff, self).__init__("Bo Staff", "Its a long stick", 'lair', 20, 10)
+        super(BoStaff, self).__init__("Bo Staff", "Its a long stick", 'lair', 200, 10)
 
 
 class Stick(Weapon):
     def __init__(self):
-        super(Stick, self).__init__("Stick", "It's a stick", 'room', 25, 0)
+        super(Stick, self).__init__("Stick", "It's a stick", 'room', 258, 0)
 
 
 class MelonBratch(Weapon):
@@ -218,7 +218,7 @@ class Leggings(Armor):
 
 class Character(object):
     def __init__(self, name, race, occupation, mode, status, attack_type, health=100, money=0, target=None, dmg=0,
-                 ):
+                 damage_taken=0):
         self.name = name
         self.race = race
         self.occupation = occupation
@@ -229,28 +229,28 @@ class Character(object):
         self.money = money
         self.target = target
         self.dmg = dmg
-
+        self.damage_taken = dmg
         self.inventory = []
 
-    def take_damage(self):
-        self.health -= self.dmg
+    def take_damage(self, damage_taken):
+        self.health -= damage_taken
 
-    def attack(self, target, dmg):
+    def attack(self, target):
         if target.status == 'dead':
             print(target.name + " is already dead")
             return
         attack_chance = random.randint(1, 6)
 
         if attack_chance > 1:
-            target.take_damage()
+            target.take_damage(self.damage_taken)
             print("%s attacks %s." % (self.name, target.name))
             print("It hits.")
-            print("%s takes %s damage." % (self.name, self.dmg))
+            print("%s takes %s damage." % (target.name, self.damage_taken))
         else:
             print("%s misses." % self.name)
-        self.health -= dmg
+
         if self.health <= 0:
-            print(self.name + " has died")
+            print(target.name + " has died")
             self.status = 'dead'
 
     def defend(self, me):
@@ -336,7 +336,7 @@ sword = Sword()
 main_character = Character("Dave", 'nugu', 'radish_farmer', 'hostile', 'alive', 'bludgeon', 100, 1000, None, 25)
 bar_tender = Character("Matilda", 'human', 'bar_tender', 'friendly', 'alive', None, money=9999999)
 bar_patron = Character("Craig", 'elf', 'bum', 'friendly', 'alive', None, 100, 5)
-boss1 = Character("Ukifak Lasgoni", 'orc', 'war_lord', 'hostile', 'alive', 'swing', 200000, 0, None, 50)
+boss1 = Character("Ukifak Lasgoni", 'orc', 'war_lord', 'hostile', 'alive', 'swing', 200000, 0, None, 500)
 boss2 = Character("JoJo", 'human', '?', 'hostile', 'alive', 'punch', 1000000, 0, None, 60)
 final_boss = Character("Captain Poof Wonder", 'human', 'knight_captain', 'hostile', 'deceased', None)
 dio = Character("Dio", 'human', 'annoyance', 'hostile', 'alive', 'swing', 1000)
@@ -347,13 +347,14 @@ rophel = Character("Rophel", 'tortoise', 'ninja', 'neutral', 'alive', 'stab')
 splinker = Character("Splinker", 'rat', 'unknown', 'friendly', 'alive', None)
 hot_mans = Character("Lil' RiceGrain", 'human', 'rapper', 'neutral', 'alive', 'shoot', 2)
 dwarf = Character("Harold", 'dwarf', 'theif', 'hostile', 'alive', 'shank')
-worshipper1 = Character("Kristofer", 'human', 'worshipper', 'neutral', 'alive', 'punch', 10)
-worshipper2 = Character("Lonny", 'human', 'worshipper', 'neutral', 'alive', 'punch', 10)
-worshipper3 = Character("Eliseo", 'human', 'worshipper', 'neutral', 'alive', 'punch', 10)
-worshipper4 = Character("Ibrahim", 'human', 'worshipper', 'neutral', 'alive', 'punch', 10)
-worshipper5 = Character("Dante", 'human', 'worshipper', 'neutral', 'alive', 'punch', 10)
-osian = Character("Katou", 'orange_beast', 'jerk', 'hostile', 'alive', 'swipe', 999999999999999999999999999999999999999)
-mj = Character("Michael Jackson", 'human', 'singer', 'hostile', 'alive', 'flick', 10000000)
+worshipper1 = Character("Kristofer", 'human', 'worshipper', 'neutral', 'alive', 'punch', 10, 0, None, 10)
+worshipper2 = Character("Lonny", 'human', 'worshipper', 'neutral', 'alive', 'punch', 10, 0, None, 10)
+worshipper3 = Character("Eliseo", 'human', 'worshipper', 'neutral', 'alive', 'punch', 10, 0, None, 10)
+worshipper4 = Character("Ibrahim", 'human', 'worshipper', 'neutral', 'alive', 'punch', 10, 0, None, 10)
+worshipper5 = Character("Dante", 'human', 'worshipper', 'neutral', 'alive', 'punch', 10, 0, None, 10)
+osian = Character("Katou", 'orange_beast', 'jerk', 'hostile', 'alive', 'swipe', 999999999999999999999999999999999999999,
+                  0, None, 99999999999999999999999)
+mj = Character("Michael Jackson", 'human', 'singer', 'hostile', 'alive', 'flick', 10000000, 0, None, 10000000)
 
 
 class Room(object):
@@ -454,11 +455,11 @@ def combat(target):
             print("What do you do?")
             combat_command = input(">_").lower()
             if combat_command == 'attack':
-                main_character.attack(target, 5)
+                main_character.attack(target)
             else:
                 print("You hesitate")
         if target.health > 0:
-            target.attack(main_character, 5)
+            target.attack(main_character)
         first_turn = False
 
 
@@ -476,6 +477,9 @@ while True:
         for character in current_node.characters:
             if character.mode == 'hostile':
                 combat(character)
+                if main_character.health == 0:
+                    print("You died.")
+                    quit(0)
 
     command = input('>_').lower()
     if command == 'quit':
