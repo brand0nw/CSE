@@ -33,22 +33,23 @@ class Consumable(Item):
         print("You use %s" % self.name)
 
 
-class Equipable(Item):
+class Equippable(Item):
     def __init__(self, name, location, value):
-        super(Equipable, self).__init__(name, location, value)
+        super(Equippable, self).__init__(name, location, value)
 
     def equip(self):
         print("You equip %s" % self.name)
+        global current_item
 
 
-class Armor(Equipable):
+class Armor(Equippable):
     def __init__(self, name, location, value, defense=0, material=None):
         super(Armor, self).__init__(name, location, value)
         self.defense = defense
         self.material = material
 
 
-class Cosmetic(Equipable):
+class Cosmetic(Equippable):
     def __init__(self, name, location, value, look):
         super(Cosmetic, self).__init__(name, location, value)
         self.look = look
@@ -236,9 +237,6 @@ class Character(object):
         self.health -= damage_taken
 
     def attack(self, target):
-        if target.status == 'dead':
-            print(target.name + " is already dead")
-            return
         attack_chance = random.randint(1, 6)
 
         if attack_chance > 1:
@@ -249,9 +247,12 @@ class Character(object):
         else:
             print("%s misses." % self.name)
 
-        if self.health <= 0:
+        if self.health == 0:
             print(target.name + " has died")
             self.status = 'dead'
+        if target.status == 'dead':
+            print(target.name + " is already dead")
+            return
 
     def defend(self, me):
         if self.mode in ['hostile', 'neutral']:
@@ -458,6 +459,10 @@ def combat(target):
                 main_character.attack(target)
             else:
                 print("You hesitate")
+                if main_character.health == 0:
+                    print("You died.")
+                    quit(0)
+
         if target.health > 0:
             target.attack(main_character)
         first_turn = False
@@ -477,9 +482,6 @@ while True:
         for character in current_node.characters:
             if character.mode == 'hostile':
                 combat(character)
-                if main_character.health == 0:
-                    print("You died.")
-                    quit(0)
 
     command = input('>_').lower()
     if command == 'quit':
