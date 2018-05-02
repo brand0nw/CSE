@@ -340,7 +340,7 @@ bar_patron = Character("Craig", 'elf', 'bum', 'friendly', 'alive', None, 100, 5)
 boss1 = Character("Ukifak Lasgoni", 'orc', 'war_lord', 'hostile', 'alive', 'swing', 200000, 0, None, 500)
 boss2 = Character("JoJo", 'human', '?', 'hostile', 'alive', 'punch', 1000000, 0, None, 60)
 final_boss = Character("Captain Poof Wonder", 'human', 'knight_captain', 'hostile', 'deceased', None)
-dio = Character("Dio", 'human', 'annoyance', 'hostile', 'alive', 'swing', 1000)
+dio = Character("Dio", 'human', 'annoyance', 'hostile', 'alive', 'swing', 1000, 0, None, 25)
 leonarda = Character("Leonarda", 'tortoise', 'ninja', 'neutral', 'alive', 'swipe')
 donetella = Character("Donatella", 'tortoise', 'ninja', 'neutral', 'alive', 'swing')
 michaelangela = Character("Michaelangela", 'tortoise', 'ninja', 'neutral', 'alive', 'swing')
@@ -379,19 +379,23 @@ class Room(object):
         global current_node
         current_node = globals()[getattr(self, direction)]
 
+    def flee(self, flee):
+        flee = random.choice([directions])
+
 
 directions = ['north', 'south', 'east', 'west', 'north_west', 'north_east', 'south_east', 'south_west']
 short_direction = ['n', 's', 'e', 'w', 'nw', 'ne', 'se', 'sw']
 
 # Initialize Rooms
 room = Room("Room", 'room', "You are in a room with a torn up couch and claw marks on a wall.\n"
-                            "There is a track suit present.", None, 'echoing_room',
+                            "There is a track suit present. There is on;y exits to the South, West and North East.",
+            None, 'echoing_room',
             'lego_room', None, None, 'steel_mill', None, None, None, [track_suit, boots1, helmet1, breastplate1,
                                                                       leggings1, sword])
 steel_mill = Room("Steel Mill", 'steel_mill', "You enter a room with the Orc Warlord Ukifak Lasgoni.", None, None, None,
                   'empty_room', None, None, 'room', None, [boss1], [health_potion, stamina_potion])
 empty_room = Room("Empty Room", 'empty_room', "You enter an empty room all that is there is a button.", None, None,
-                  'steel_mill', None, None, None, None, None,[], [melon_bratch, health_potion, stamina_potion])
+                  'steel_mill', None, None, None, None, None, [], [melon_bratch, health_potion, stamina_potion])
 echoing_room = Room("Echoing Room", 'echoing_room', "You enter an empty room. You feel an annoying presence.", 'room',
                     'sanctuary', None, 'well_lit_room', None, None, None, None, [osian], [boots, helmet, breastplate,
                                                                                           leggings, binky])
@@ -424,7 +428,7 @@ final_boss_room = Room("Final Boss Room", 'final_boss_room',
                        "But he seems different.\n"
                        "He screams 'You were expecting a final boss, but it was I Dio.'", 'portal_room', None,
                        'lego_room',
-                       None, None, 'hallway', None, None, [final_boss, dio], [chicken_hat])
+                       None, None, 'hallway', None, None, [dio], [chicken_hat])
 portal_room = Room("Portal Entrance", 'portal_room', "You walk into a room with a glowing red portal.", 'lava_room',
                    'final_boss_room', None, None, None, None, None, None, )
 lava_room = Room("hOt RoOm", 'lava_room', "YoU entEr a roOm whEre iT Is sO hot thAt th3 c0nsoLe is LAGG1Ng.\n"
@@ -459,12 +463,14 @@ def combat(target):
                 main_character.attack(target)
             else:
                 print("You hesitate")
-                if main_character.health == 0:
-                    print("You died.")
-                    quit(0)
-
+            # if combat_command == 'flee':
+            #     main_character
+                print("You flee")
         if target.health > 0:
             target.attack(main_character)
+        if main_character.health <= 0:
+            print("You died.")
+            quit(0)
         first_turn = False
 
 
