@@ -59,29 +59,30 @@ class Cosmetic(Equippable):
 
 
 class Material(Item):
-    def __init__(self, name, location, value):
+    def __init__(self, name, location, value, damage_mitigation=0.0):
         super(Material, self).__init__(name, location, value)
+        # self.armor_mitigation = character.attack * damage_mitigation
 
 
 # Materials
 class Bone(Material):
     def __init__(self, name, location, value):
-        super(Bone, self).__init__(name, location, value)
+        super(Bone, self).__init__(name, location, value, 0.5)
 
 
 class Blood(Material):
     def __init__(self, name, location, value):
-        super(Blood, self).__init__(name, location, value)
+        super(Blood, self).__init__(name, location, value, 0.000001)
 
 
 class Scales(Material):
     def __init__(self, name, location, value):
-        super(Scales, self).__init__(name, location, value)
+        super(Scales, self).__init__(name, location, value, 0.0)
 
 
 class Steel(Material):
     def __init__(self, name, location, value):
-        super(Steel, self).__init__(name, location, value)
+        super(Steel, self).__init__(name, location, value, 0.40)
 
 
 class Wood(Material):
@@ -263,12 +264,24 @@ class Character(object):
 
     def take(self, item):
         self.inventory.append(item)
-        print("Taken")
+        print("You take the %s" % item_requested)
 
     def drop(self, item):
         self.inventory.remove(item)
         print("Dropped")
 
+    def flee(self):
+        global current_node
+        chosen_direction = random.choice(directions)
+        try:
+            current_node.move(chosen_direction)
+            print("You flee successfully")
+            return True
+        except KeyError:
+            print("You fail to flee")
+            return False
+
+    def view_inventory(self):
 
 # Instantiation of items
 track_suit = TrackSuit()
@@ -353,8 +366,8 @@ worshipper2 = Character("Lonny", 'human', 'worshipper', 'neutral', 'alive', 'pun
 worshipper3 = Character("Eliseo", 'human', 'worshipper', 'neutral', 'alive', 'punch', 10, 0, None, 10)
 worshipper4 = Character("Ibrahim", 'human', 'worshipper', 'neutral', 'alive', 'punch', 10, 0, None, 10)
 worshipper5 = Character("Dante", 'human', 'worshipper', 'neutral', 'alive', 'punch', 10, 0, None, 10)
-osian = Character("Katou", 'orange_beast', 'jerk', 'hostile', 'alive', 'swipe', 999999999999999999999999999999999999999,
-                  0, None, 99999999999999999999999)
+osian = Character("Katou", 'orange_beast', 'jerk', 'hostile', 'alive', 'swipe', 999999999999999999999999999999999999,
+                  0, None, 1)
 mj = Character("Michael Jackson", 'human', 'singer', 'hostile', 'alive', 'flick', 10000000, 0, None, 10000000)
 
 
@@ -379,8 +392,6 @@ class Room(object):
         global current_node
         current_node = globals()[getattr(self, direction)]
 
-    def flee(self, flee):
-        flee = random.choice([directions])
 
 
 directions = ['north', 'south', 'east', 'west', 'north_west', 'north_east', 'south_east', 'south_west']
@@ -388,11 +399,13 @@ short_direction = ['n', 's', 'e', 'w', 'nw', 'ne', 'se', 'sw']
 
 # Initialize Rooms
 room = Room("Room", 'room', "You are in a room with a torn up couch and claw marks on a wall.\n"
-                            "There is a track suit present. There is on;y exits to the South, West and North East.",
+                            "There is a track suit and a set of steel armor with a sword present.\n"
+                            "There is only exits to the South, West and North East.",
             None, 'echoing_room',
             'lego_room', None, None, 'steel_mill', None, None, None, [track_suit, boots1, helmet1, breastplate1,
                                                                       leggings1, sword])
-steel_mill = Room("Steel Mill", 'steel_mill', "You enter a room with the Orc Warlord Ukifak Lasgoni.", None, None, None,
+steel_mill = Room("Steel Mill", 'steel_mill', "You enter a room with the Orc Warlord Ukifak Lasgoni.\n"
+                                              "You cannot leave to the southeast or west", None, None, None,
                   'empty_room', None, None, 'room', None, [boss1], [health_potion, stamina_potion])
 empty_room = Room("Empty Room", 'empty_room', "You enter an empty room all that is there is a button.", None, None,
                   'steel_mill', None, None, None, None, None, [], [melon_bratch, health_potion, stamina_potion])
@@ -455,17 +468,21 @@ def combat(target):
     print("A wild %s appears!" % target.name)
     first_strike = random.choice(["you", "enemy"])
     first_turn = True
-    while main_character.health > 0 and target.health > 0:
+    flee = False
+    while main_character.health > 0 and target.health > 0 and not flee:
         if first_strike == 'you' or not first_turn:
             print("What do you do?")
             combat_command = input(">_").lower()
             if combat_command == 'attack':
                 main_character.attack(target)
+            if combat_command == 'flee':
+                print("You attempt to flee")
+                flee = main_character.flee()
+                if flee:
+                    continue
             else:
                 print("You hesitate")
-            # if combat_command == 'flee':
-            #     main_character
-                print("You flee")
+
         if target.health > 0:
             target.attack(main_character)
         if main_character.health <= 0:
@@ -487,6 +504,7 @@ while True:
     if current_node.characters is not None:
         for character in current_node.characters:
             if character.mode == 'hostile':
+
                 combat(character)
 
     command = input('>_').lower()
@@ -513,8 +531,9 @@ while True:
 
     # Handles taking items
     elif "take" in command:
+        if command[5:] == '':
+            print("Take what?")
         item_requested = command[5:]
-        print(item_requested)
         for item_ in current_node.item:
             if item_.name.lower() == item_requested.lower():
                 main_character.take(item_)
@@ -528,3 +547,5 @@ while True:
     else:
         print('Command Not Recognized.')
     print()
+    if 'inventory' in command:
+        print("You have %s." % "".join(list(inventory)))
