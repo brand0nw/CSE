@@ -282,6 +282,13 @@ class Character(object):
             return False
 
     def view_inventory(self):
+        try:
+            print("There is %s present in the room" % ",".join(list(room.item)))
+            return True
+        except TypeError:
+            print("Nothing is here")
+            return False
+
 
 # Instantiation of items
 track_suit = TrackSuit()
@@ -393,7 +400,6 @@ class Room(object):
         current_node = globals()[getattr(self, direction)]
 
 
-
 directions = ['north', 'south', 'east', 'west', 'north_west', 'north_east', 'south_east', 'south_west']
 short_direction = ['n', 's', 'e', 'w', 'nw', 'ne', 'se', 'sw']
 
@@ -497,8 +503,8 @@ while True:
     # Prints room information
     print(current_node.name)
     print(current_node.description)
-
-    leg_status = 'crawl'
+    # print("You can go %s" % ", ".join(list(directions in current_node)))
+    # leg_status = 'crawl'
 
     # Check for hostile characters
     if current_node.characters is not None:
@@ -525,7 +531,7 @@ while True:
                 print("You fall down the manhole and break your legs.")
                 print("You can no longer walk.")
             if current_node == lair:
-                print("You %s into the room" % leg_status)
+                print("You %s into the room")
         except KeyError:
             print("You cannot go that way.")
 
@@ -543,9 +549,8 @@ while True:
         for item_ in inventory:
             if item_.name.lower() == item_requested.lower():
                 main_character.drop(item_)
-
+    elif "inventory" in command:
+        main_character.view_inventory(inventory)
     else:
         print('Command Not Recognized.')
     print()
-    if 'inventory' in command:
-        print("You have %s." % "".join(list(inventory)))
