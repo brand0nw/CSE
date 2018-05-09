@@ -276,9 +276,11 @@ class Character(object):
         try:
             current_node.move(chosen_direction)
             print("You flee successfully")
+            print(current_node)
             return True
         except KeyError:
             print("You fail to flee")
+            print(current_node)
             return False
 
     def view_inventory(self):
@@ -498,13 +500,13 @@ def combat(target):
 
 
 inventory = []
+leg_status = 'normal'
 
 while True:
     # Prints room information
     print(current_node.name)
     print(current_node.description)
-    # print("You can go %s" % ", ".join(list(directions in current_node)))
-    # leg_status = 'crawl'
+    # print("You can go %s" % ", ".join(list(directions in current_node))
 
     # Check for hostile characters
     if current_node.characters is not None:
@@ -514,6 +516,18 @@ while True:
                 combat(character)
 
     command = input('>_').lower()
+    if command == 'win':
+        print("You win\n"
+              "Nice job cheating your way through\n"
+              " __________   __    __"
+              "/    ______| |  |  |  |"
+              "|   |        |  |  |  |"
+              "|   |        |  |__|  |"
+              "|   |"
+              "|   |"
+              "|   |______"
+              "\__________|             ")
+        quit(0)
     if command == 'quit':
         quit(0)
     elif command in short_direction:
@@ -527,11 +541,18 @@ while True:
         try:
             current_node.move(command)
             if current_node == sewer_maintenance:
+                main_character.health -= 50
+                print("You fall")
+                leg_status = 'broken'
+                print("You break your legs\n"
+                      "You can no longer walk.")
+                print("You have %s health" % main_character.health)
                 print(sewer_maintenance.name)
-                print("You fall down the manhole and break your legs.")
-                print("You can no longer walk.")
-            if current_node == lair:
-                print("You %s into the room")
+            if leg_status is False:
+                print("You crawl into the room.")
+            elif leg_status == 'normal':
+                print("You walk into the room.")
+
         except KeyError:
             print("You cannot go that way.")
 
