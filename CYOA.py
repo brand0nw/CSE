@@ -146,33 +146,17 @@ class SmallHealthPotion(Consumable):
     def sip(self):
         print("Taste like cherry")
 
+        self.health += 25
+
 
 class LargeHealthPotion(Consumable):
     def __init__(self):
         super(LargeHealthPotion, self).__init__("Small Health Potion", 'steel_mill''sanctuary''sewer_maintenance'
                                                                        'well_lit_room''lair', 'heal', 2000)
+        self.health += 100
 
     def gulp(self):
         print("You take a fat gulp")
-
-
-class SmallStaminaPotion(Consumable):
-    def __init__(self):
-        super(SmallStaminaPotion, self).__init__("Small Stamina Potion", 'steel_mill''empty_room''vault''sanctuary',
-                                                 'recover', 200)
-
-    def drink(self):
-        print("You drink the yellow liquid")
-
-
-class LargeStaminaPotion(Consumable):
-    def __init__(self):
-        super(LargeStaminaPotion, self).__init__("Small Health Potion", 'steel_mill''sanctuary''sewer_maintenance'
-                                                                        'well_lit_room''lair', 'heal', 2000)
-
-    def swig(self):
-        print("Your take a fat swig of the potion")
-
 
 # Cosmetics
 
@@ -339,8 +323,6 @@ leggings4 = Leggings("Wooden Leggings", 'lava_room', 50, 15, Wood("Wood", None, 
 
 health_potion = SmallHealthPotion()
 bigger_health_potion = LargeHealthPotion()
-stamina_potion = SmallStaminaPotion()
-bigger_stamina_potion = LargeStaminaPotion()
 
 # Weapons
 
@@ -414,21 +396,21 @@ room = Room("Room", 'room', "You are in a room with a torn up couch and claw mar
                                                                       leggings1, sword])
 steel_mill = Room("Steel Mill", 'steel_mill', "You enter a room with the Orc Warlord Ukifak Lasgoni.\n"
                                               "You cannot leave to the southeast or west", None, None, None,
-                  'empty_room', None, None, 'room', None, [boss1], [health_potion, stamina_potion])
+                  'empty_room', None, None, 'room', None, [boss1], [health_potion])
 empty_room = Room("Empty Room", 'empty_room', "You enter an empty room all that is there is a button.", None, None,
-                  'steel_mill', None, None, None, None, None, [], [melon_bratch, health_potion, stamina_potion])
+                  'steel_mill', None, None, None, None, None, [], [melon_bratch, health_potion])
 echoing_room = Room("Echoing Room", 'echoing_room', "You enter an empty room. You feel an annoying presence.", 'room',
                     'sanctuary', None, 'well_lit_room', None, None, None, None, [osian], [boots, helmet, breastplate,
                                                                                           leggings, binky])
 well_lit_room = Room("Well Lit Room", 'well_lit_room', "You enter a well lit room with a heavily armored JoJo.\n"
                                                        "He seems aggressive as he mutters 'Omae wa moe shinderu'.",
                      None, None, 'echoing_room', 'vault',
-                     None, None, None, None, [boss2], [bigger_health_potion, bigger_stamina_potion])
+                     None, None, None, None, [boss2], [bigger_health_potion])
 vault = Room("Vault of Undeniably Valuable Really Long Name Loot", 'vault',
              "You enter a room filled with gold.\n"
              "In the center of the room there is a pedestal.\n"
              "In the pedestal there is a weapon.", None, 'sewer_maintenance', 'well_lit_room', None, None, None, None,
-             None, [], [health_potion, stamina_potion, light_blade, boots3, helmet3, breastplate3, leggings3])
+             None, [], [health_potion, light_blade, boots3, helmet3, breastplate3, leggings3])
 sewer_maintenance = Room("Sewer Maintenance", 'sewer_maintenance',
                          "You fall down a hole and break your legs there is no way out.\n"
                          "The room is dark, you feel a hostile presence.", None, None, 'lair',
@@ -439,8 +421,7 @@ lair = Room("Lair", 'lair', "The room is dark, there are four shadowy figures wh
 sanctuary = Room("Sanctuary", 'sanctuary', "You leave the dark room to find yourself in a well lit tavern.\n"
                                            "There are people present who seem to be non-hostile."
                                            "They call the tavern Sanctuary.", 'echoing_room', None, None, None, None,
-                 None, 'lego_room', None, [bar_tender, bar_patron], [health_potion, bigger_health_potion,
-                                                                     stamina_potion, bigger_stamina_potion])
+                 None, 'lego_room', None, [bar_tender, bar_patron], [health_potion, bigger_health_potion])
 lego_room = Room("Child's Room", 'lego_room', "You enter a room that resembles one that would belong to a child.\n"
                                               " There are toys everywhere, especially the painful lego.",
                  'final_boss_room', None, None, 'room', None, None, None, None, None, [bonnet, rusty_dagger])
@@ -519,14 +500,29 @@ while True:
     if command == 'win':
         print("You win\n"
               "Nice job cheating your way through\n"
-              " __________   __    __"
-              "/    ______| |  |  |  |"
-              "|   |        |  |  |  |"
-              "|   |        |  |__|  |"
-              "|   |"
-              "|   |"
-              "|   |______"
-              "\__________|             ")
+              " _______  __    __  ______  ________  ________  ______  ______    __ \n"
+              "/    ___||  |  |  ||  ____||   __   ||__    __||  ____||   __ |  |  |\n"
+              "|  |     |  |  |  || |     |  |__|  |   |  |   | |     |  |__| | |  |\n"
+              "|  |     |  |__|  || |____ |   __   |   |  |   | |____ |   __   ||  |\n"
+              "|  |     |   __   ||  ____||  |  |  |   |  |   |  ____||  |  |  ||  |\n"
+              "|  |     |  |  |  || |     |  |  |  |   |  |   | |     |  |  |  ||__|\n"
+              "|  |____ |  |  |  || |____ |  |  |  |   |  |   | |____ |  |  |  | __ \n"
+              "\_______||__|  |__||______||__|  |__|   |__|   |______||__|  |__||__|\n")
+        print("  _____ _    _ ______       _______ ______ _____  _ \n"
+              " / ____| |  | |  ____|   /\|__   __|  ____|  __ \| |\n"
+              "| |    | |__| | |__     /  \  | |  | |__  | |__) | |\n"
+              "| |    |  __  |  __|   / /\ \ | |  |  __| |  _  /| |\n"
+              "| |____| |  | | |____ / ____ \| |  | |____| | \ \|_|\n"
+              " \_____|_|  |_|______/_/    \_\_|  |______|_|  \_(_)\n")
+        print(" _____                       _    _         ______      _            \n"
+              "|  __ \                     | |  (_)       |  ____|    | | \n"
+              "| |__) |   _ _ __ ___  _ __ | | ___ _ __   | |__   __ _| |_ ___ _ __ \n"
+              "|  ___/ | | | '_ ` _ \| '_ \| |/ / | '_ \  |  __| / _` | __/ _ \ '__|\n"
+              "| |   | |_| | | | | | | |_) |   <| | | | | | |___| (_| | ||  __/ | \n"
+              "|_|    \__,_|_| |_| |_| .__/|_|\_\_|_| |_| |______\__,_|\__\___|_| \n"
+              "                      | |\n"
+              "                      |_|\n")
+
         quit(0)
     if command == 'quit':
         quit(0)
@@ -570,8 +566,8 @@ while True:
         for item_ in inventory:
             if item_.name.lower() == item_requested.lower():
                 main_character.drop(item_)
-    elif "inventory" in command:
-        main_character.view_inventory(inventory)
+    elif 'inventory' in command:
+        main_character.view_inventory(inventory.join(list))
     else:
         print('Command Not Recognized.')
     print()
