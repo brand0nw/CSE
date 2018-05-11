@@ -153,10 +153,10 @@ class LargeHealthPotion(Consumable):
     def __init__(self):
         super(LargeHealthPotion, self).__init__("Small Health Potion", 'steel_mill''sanctuary''sewer_maintenance'
                                                                        'well_lit_room''lair', 'heal', 2000)
-        self.health += 100
 
     def gulp(self):
         print("You take a fat gulp")
+
 
 # Cosmetics
 
@@ -482,6 +482,13 @@ def combat(target):
 
 inventory = []
 leg_status = 'normal'
+
+
+def heal(target):
+    if "gulp" in command:
+        main_character.health += 100
+        print("You heal")
+
 
 while True:
     # Prints room information
