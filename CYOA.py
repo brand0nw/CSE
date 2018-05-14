@@ -145,15 +145,15 @@ class SmallHealthPotion(Consumable):
 
     def sip(self):
         print("Taste like cherry")
-
         self.health += 25
+        print("You get 25 health")
 
 
 class LargeHealthPotion(Consumable):
     def __init__(self):
         super(LargeHealthPotion, self).__init__("Small Health Potion", 'steel_mill''sanctuary''sewer_maintenance'
                                                                        'well_lit_room''lair', 'heal', 2000)
-
+        
     def gulp(self):
         print("You take a fat gulp")
 
@@ -344,7 +344,7 @@ bar_patron = Character("Craig", 'elf', 'bum', 'friendly', 'alive', None, 100, 5)
 boss1 = Character("Ukifak Lasgoni", 'orc', 'war_lord', 'hostile', 'alive', 'swing', 200000, 0, None, 500)
 boss2 = Character("JoJo", 'human', '?', 'hostile', 'alive', 'punch', 1000000, 0, None, 60)
 final_boss = Character("Captain Poof Wonder", 'human', 'knight_captain', 'hostile', 'deceased', None)
-dio = Character("Dio", 'human', 'annoyance', 'hostile', 'alive', 'swing', 1000, 0, None, 25)
+dio = Character("Dio", 'human', 'annoyance', 'hostile', 'alive', 'roada_rolla', 1000, 0, None, 25)
 leonarda = Character("Leonarda", 'tortoise', 'ninja', 'neutral', 'alive', 'swipe')
 donetella = Character("Donatella", 'tortoise', 'ninja', 'neutral', 'alive', 'swing')
 michaelangela = Character("Michaelangela", 'tortoise', 'ninja', 'neutral', 'alive', 'swing')
@@ -504,17 +504,24 @@ while True:
                 combat(character)
 
     command = input('>_').lower()
+
+    if command == 'quit':
+        quit(0)
+    elif command in short_direction:
+        # Look for which command we typed in
+        pos = short_direction.index(command)
+        # Change the command to be the long form
+        command = directions[pos]
+
     if command == 'win':
         print("You win\n"
-              "Nice job cheating your way through\n"
-              " _______  __    __  ______  ________  ________  ______  ______    __ \n"
-              "/    ___||  |  |  ||  ____||   __   ||__    __||  ____||   __ |  |  |\n"
-              "|  |     |  |  |  || |     |  |__|  |   |  |   | |     |  |__| | |  |\n"
-              "|  |     |  |__|  || |____ |   __   |   |  |   | |____ |   __   ||  |\n"
-              "|  |     |   __   ||  ____||  |  |  |   |  |   |  ____||  |  |  ||  |\n"
-              "|  |     |  |  |  || |     |  |  |  |   |  |   | |     |  |  |  ||__|\n"
-              "|  |____ |  |  |  || |____ |  |  |  |   |  |   | |____ |  |  |  | __ \n"
-              "\_______||__|  |__||______||__|  |__|   |__|   |______||__|  |__||__|\n")
+              "Nice job cheating your way through")
+        print("  _____ _    _ ______       _______ ______ _____  _ \n"
+              " / ____| |  | |  ____|   /\|__   __|  ____|  __ \| |\n"
+              "| |    | |__| | |__     /  \  | |  | |__  | |__) | |\n"
+              "| |    |  __  |  __|   / /\ \ | |  |  __| |  _  /| |\n"
+              "| |____| |  | | |____ / ____ \| |  | |____| | \ \|_|\n"
+              " \_____|_|  |_|______/_/    \_\_|  |______|_|  \_(_)\n")
         print("  _____ _    _ ______       _______ ______ _____  _ \n"
               " / ____| |  | |  ____|   /\|__   __|  ____|  __ \| |\n"
               "| |    | |__| | |__     /  \  | |  | |__  | |__) | |\n"
@@ -529,15 +536,7 @@ while True:
               "|_|    \__,_|_| |_| |_| .__/|_|\_\_|_| |_| |______\__,_|\__\___|_| \n"
               "                      | |\n"
               "                      |_|\n")
-
         quit(0)
-    if command == 'quit':
-        quit(0)
-    elif command in short_direction:
-        # Look for which command we typed in
-        pos = short_direction.index(command)
-        # Change the command to be the long form
-        command = directions[pos]
 
     # Handles Movement
     if command in directions:
