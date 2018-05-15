@@ -136,26 +136,9 @@ class MelonBratch(Weapon):
         super(MelonBratch, self).__init__("Melon Bratch", "It talks", 'empty_room', 9999999999999999, 99999999999999999)
 
 
-# Consumables
-
-class SmallHealthPotion(Consumable):
+class Turd(Weapon):
     def __init__(self):
-        super(SmallHealthPotion, self).__init__("Small Health Potion", 'steel_mill''empty_room''vault''sanctuary',
-                                                'heal', 200)
-
-    def sip(self):
-        print("Taste like cherry")
-        self.health += 25
-        print("You get 25 health")
-
-
-class LargeHealthPotion(Consumable):
-    def __init__(self):
-        super(LargeHealthPotion, self).__init__("Small Health Potion", 'steel_mill''sanctuary''sewer_maintenance'
-                                                                       'well_lit_room''lair', 'heal', 2000)
-        
-    def gulp(self):
-        print("You take a fat gulp")
+        super(Turd, self).__init__("Turd", "It smells", 'lego_room', 0, 0)
 
 
 # Cosmetics
@@ -319,11 +302,6 @@ helmet4 = Helmet("Wooden Helmet", 'lava_room', 50, 10, Wood("Wood", None, 20))
 breastplate4 = Breastplate("Wooden Breastplate", 'lava_room', 50, 20, Wood("Wood", None, 20))
 leggings4 = Leggings("Wooden Leggings", 'lava_room', 50, 15, Wood("Wood", None, 20))
 
-# Consumables
-
-health_potion = SmallHealthPotion()
-bigger_health_potion = LargeHealthPotion()
-
 # Weapons
 
 melon_bratch = MelonBratch()
@@ -335,6 +313,7 @@ rusty_dagger = RustyDagger()
 sai = Sai()
 club = Club()
 sword = Sword()
+turd = Turd()
 
 # Characters
 
@@ -396,21 +375,21 @@ room = Room("Room", 'room', "You are in a room with a torn up couch and claw mar
                                                                       leggings1, sword])
 steel_mill = Room("Steel Mill", 'steel_mill', "You enter a room with the Orc Warlord Ukifak Lasgoni.\n"
                                               "You cannot leave to the southeast or west", None, None, None,
-                  'empty_room', None, None, 'room', None, [boss1], [health_potion])
+                  'empty_room', None, None, 'room', None, [boss1])
 empty_room = Room("Empty Room", 'empty_room', "You enter an empty room all that is there is a button.", None, None,
-                  'steel_mill', None, None, None, None, None, [], [melon_bratch, health_potion])
+                  'steel_mill', None, None, None, None, None, [], [melon_bratch])
 echoing_room = Room("Echoing Room", 'echoing_room', "You enter an empty room. You feel an annoying presence.", 'room',
                     'sanctuary', None, 'well_lit_room', None, None, None, None, [osian], [boots, helmet, breastplate,
                                                                                           leggings, binky])
 well_lit_room = Room("Well Lit Room", 'well_lit_room', "You enter a well lit room with a heavily armored JoJo.\n"
                                                        "He seems aggressive as he mutters 'Omae wa moe shinderu'.",
                      None, None, 'echoing_room', 'vault',
-                     None, None, None, None, [boss2], [bigger_health_potion])
+                     None, None, None, None, [boss2])
 vault = Room("Vault of Undeniably Valuable Really Long Name Loot", 'vault',
              "You enter a room filled with gold.\n"
              "In the center of the room there is a pedestal.\n"
              "In the pedestal there is a weapon.", None, 'sewer_maintenance', 'well_lit_room', None, None, None, None,
-             None, [], [health_potion, light_blade, boots3, helmet3, breastplate3, leggings3])
+             None, [], [light_blade, boots3, helmet3, breastplate3, leggings3])
 sewer_maintenance = Room("Sewer Maintenance", 'sewer_maintenance',
                          "You fall down a hole and break your legs there is no way out.\n"
                          "The room is dark, you feel a hostile presence.", None, None, 'lair',
@@ -421,10 +400,10 @@ lair = Room("Lair", 'lair', "The room is dark, there are four shadowy figures wh
 sanctuary = Room("Sanctuary", 'sanctuary', "You leave the dark room to find yourself in a well lit tavern.\n"
                                            "There are people present who seem to be non-hostile."
                                            "They call the tavern Sanctuary.", 'echoing_room', None, None, None, None,
-                 None, 'lego_room', None, [bar_tender, bar_patron], [health_potion, bigger_health_potion])
+                 None, 'lego_room', None, [bar_tender, bar_patron])
 lego_room = Room("Child's Room", 'lego_room', "You enter a room that resembles one that would belong to a child.\n"
                                               " There are toys everywhere, especially the painful lego.",
-                 'final_boss_room', None, None, 'room', None, None, None, None, None, [bonnet, rusty_dagger])
+                 'final_boss_room', None, None, 'room', None, None, None, None, None, [bonnet, rusty_dagger, turd])
 final_boss_room = Room("Final Boss Room", 'final_boss_room',
                        "You enter a room that the final boss resides in front of you, Captain Poof Wonder...\n"
                        "But he seems different.\n"
@@ -482,13 +461,6 @@ def combat(target):
 
 inventory = []
 leg_status = 'normal'
-
-
-def heal(target):
-    if "gulp" in command:
-        main_character.health += 100
-        print("You heal")
-
 
 while True:
     # Prints room information
@@ -550,10 +522,10 @@ while True:
                       "You can no longer walk.")
                 print("You have %s health" % main_character.health)
                 print(sewer_maintenance.name)
-            if leg_status is False:
-                print("You crawl into the room.")
-            elif leg_status == 'normal':
-                print("You walk into the room.")
+            # if leg_status is False:
+            #     print("You crawl into the room.")
+            # elif leg_status == 'normal':
+            #     print("You walk into the room.")
 
         except KeyError:
             print("You cannot go that way.")
@@ -573,7 +545,9 @@ while True:
             if item_.name.lower() == item_requested.lower():
                 main_character.drop(item_)
     elif 'inventory' in command:
-        main_character.view_inventory(inventory.join(list))
+        print("You have the following items:")
+        for item in main_character.inventory:
+            print(item.name)
     else:
         print('Command Not Recognized.')
     print()
