@@ -243,19 +243,11 @@ class Character(object):
         try:
             current_node.move(chosen_direction)
             print("You flee successfully")
-            print(current_node)
+            print(current_node.name)
             return True
         except KeyError:
             print("You fail to flee")
-            print(current_node)
-            return False
-
-    def view_inventory(self):
-        try:
-            print("There is %s present in the room" % ",".join(list(room.item)))
-            return True
-        except TypeError:
-            print("Nothing is here")
+            print(current_node.name)
             return False
 
 
@@ -336,8 +328,10 @@ worshipper2 = Character("Lonny", 'human', 'worshipper', 'neutral', 'alive', 'pun
 worshipper3 = Character("Eliseo", 'human', 'worshipper', 'neutral', 'alive', 'punch', 10, 0, None, 10)
 worshipper4 = Character("Ibrahim", 'human', 'worshipper', 'neutral', 'alive', 'punch', 10, 0, None, 10)
 worshipper5 = Character("Dante", 'human', 'worshipper', 'neutral', 'alive', 'punch', 10, 0, None, 10)
-osian = Character("Katou", 'orange_beast', 'jerk', 'hostile', 'alive', 'swipe', 999999999999999999999999999999999999,
-                  0, None, 1)
+osian = Character("Katou", 'orange_beast', 'jerk', 'hostile', 'alive', 'swipe',
+                  99999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999,
+                  0, None,
+                  99999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999)
 mj = Character("Michael Jackson", 'human', 'singer', 'hostile', 'alive', 'flick', 10000000, 0, None, 10000000)
 
 
@@ -454,7 +448,8 @@ def combat(target):
         if target.health > 0:
             target.attack(main_character)
         if main_character.health <= 0:
-            print("You died.")
+            print("You died.\n"
+                  "LOL")
             quit(0)
         first_turn = False
 
@@ -522,11 +517,6 @@ while True:
                       "You can no longer walk.")
                 print("You have %s health" % main_character.health)
                 print(sewer_maintenance.name)
-            # if leg_status is False:
-            #     print("You crawl into the room.")
-            # elif leg_status == 'normal':
-            #     print("You walk into the room.")
-
         except KeyError:
             print("You cannot go that way.")
 
@@ -538,12 +528,17 @@ while True:
         for item_ in current_node.item:
             if item_.name.lower() == item_requested.lower():
                 main_character.take(item_)
+                current_node.item.remove(item_)
 
     elif "drop" in command:
         item_requested = command[5:]
         for item_ in inventory:
             if item_.name.lower() == item_requested.lower():
                 main_character.drop(item_)
+    elif 'view' in command:
+        print("There are these items present:")
+        for item in current_node.item:
+            print(item.name)
     elif 'inventory' in command:
         print("You have the following items:")
         for item in main_character.inventory:
