@@ -215,7 +215,7 @@ class Character(object):
         else:
             print("%s misses." % self.name)
 
-        if self.health == 0:
+        if self.health <= 0:
             print(target.name + " has died")
             self.status = 'dead'
         if target.status == 'dead':
@@ -449,7 +449,7 @@ def combat(target):
             target.attack(main_character)
         if main_character.health <= 0:
             print("You died.\n"
-                  "LOL")
+                  "LOL\n")
             quit(0)
         first_turn = False
 
@@ -461,7 +461,6 @@ while True:
     # Prints room information
     print(current_node.name)
     print(current_node.description)
-    # print("You can go %s" % ", ".join(list(directions in current_node))
 
     # Check for hostile characters
     if current_node.characters is not None:
