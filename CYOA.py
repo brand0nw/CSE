@@ -59,30 +59,29 @@ class Cosmetic(Equippable):
 
 
 class Material(Item):
-    def __init__(self, name, location, value, damage_mitigation=0.0):
+    def __init__(self, name, location, value):
         super(Material, self).__init__(name, location, value)
-        # self.armor_mitigation = character.attack * damage_mitigation
 
 
 # Materials
 class Bone(Material):
     def __init__(self, name, location, value):
-        super(Bone, self).__init__(name, location, value, 0.5)
+        super(Bone, self).__init__(name, location, value)
 
 
 class Blood(Material):
     def __init__(self, name, location, value):
-        super(Blood, self).__init__(name, location, value, 0.000001)
+        super(Blood, self).__init__(name, location, value)
 
 
 class Scales(Material):
     def __init__(self, name, location, value):
-        super(Scales, self).__init__(name, location, value, 0.0)
+        super(Scales, self).__init__(name, location, value)
 
 
 class Steel(Material):
     def __init__(self, name, location, value):
-        super(Steel, self).__init__(name, location, value, 0.40)
+        super(Steel, self).__init__(name, location, value)
 
 
 class Wood(Material):
@@ -215,9 +214,10 @@ class Character(object):
         else:
             print("%s misses." % self.name)
 
-        if self.health <= 0:
+        if character.health <= 0:
             print(target.name + " has died")
             self.status = 'dead'
+            current_node.characters.remove(character.name)
         if target.status == 'dead':
             print(target.name + " is already dead")
             return
@@ -333,6 +333,7 @@ osian = Character("Katou", 'orange_beast', 'jerk', 'hostile', 'alive', 'swipe',
                   0, None,
                   99999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999)
 mj = Character("Michael Jackson", 'human', 'singer', 'hostile', 'alive', 'flick', 10000000, 0, None, 10000000)
+dan = Character("Dan", 'human','idiot', 'passive', 'alive', None, 100, 0)
 
 
 class Room(object):
@@ -411,7 +412,7 @@ lava_room = Room("hOt RoOm", 'lava_room', "YoU entEr a roOm whEre iT Is sO hot t
                  None, None, None, None, None, None, None, None, [hot_mans], [boots4, helmet4, breastplate4, leggings4])
 hall_way = Room("Dark Hallway", 'hallway', "You enter a dark hallway.\n"
                                            "Suddenly you here a man charging at you screaming 'I'm Useful!'", None,
-                None, None, None, None, None, 'shrine', 'final_boss_room', [mj])
+                None, None, None, None, None, 'shrine', 'final_boss_room', [mj, dan])
 shrine = Room("Shrine", 'shrine', "You enter the room with an eerie presence.\n"
                                   "The presence seems to come from the shrine in front of you.\n"
                                   "There is a picture of Dio.", None, 'dark_corridor', None, None, 'hallway', None,
@@ -442,8 +443,8 @@ def combat(target):
                 flee = main_character.flee()
                 if flee:
                     continue
-            else:
-                print("You hesitate")
+                if not flee:
+                    print("You hesitate")
 
         if target.health > 0:
             target.attack(main_character)
